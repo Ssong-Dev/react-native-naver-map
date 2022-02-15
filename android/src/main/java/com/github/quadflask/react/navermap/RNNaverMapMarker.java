@@ -148,12 +148,13 @@ public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> impleme
         feature.setHeight(height);
     }
 
-    public void setCaption(String text, int textSize, int color, int haloColor, Align... aligns) {
+    public void setCaption(String text, int textSize, int color, int haloColor, int offset, Align... aligns) {
         feature.setCaptionText(text);
         feature.setCaptionTextSize(textSize);
         feature.setCaptionColor(color);
         feature.setCaptionHaloColor(haloColor);
         feature.setCaptionAligns(aligns);
+        feature.setCaptionOffset(offset);
     }
 
     public void setSubCaption(String text, int textSize, int color, int haloColor) {
