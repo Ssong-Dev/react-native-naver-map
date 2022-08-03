@@ -43,14 +43,8 @@
   // Our desired API is to pass up markers/overlays as children to the mapview component.
   // This is where we intercept them and do the appropriate underlying mapview action.
   if ([subview isKindOfClass:[RNNaverMapMarker class]]) {
-  //test
     RNNaverMapMarker *marker = (RNNaverMapMarker*)subview;
-    marker.realMarker.mapView = nil;
-    [marker.realMarker setMapView:nil];
-    marker.realMarker = nil;
-    marker = nil;
     marker.realMarker.mapView = self.mapView;
-
   } else if ([subview isKindOfClass:[RNNaverMapPolylineOverlay class]]) {
     RNNaverMapPolylineOverlay *overlay = (RNNaverMapPolylineOverlay*)subview;
     overlay.realOverlay.mapView = self.mapView;
@@ -78,10 +72,8 @@
   if ([subview isKindOfClass:[RNNaverMapMarker class]]) {
     RNNaverMapMarker *marker = (RNNaverMapMarker*)subview;
     marker.realMarker.mapView = nil;
-    //test
     [marker.realMarker setMapView:nil];
     marker.realMarker = nil;
-    marker = nil;
   } else if ([subview isKindOfClass:[RNNaverMapPolylineOverlay class]]) {
     RNNaverMapPolylineOverlay *overlay = (RNNaverMapPolylineOverlay*)subview;
     overlay.realOverlay.mapView = nil;
@@ -102,7 +94,6 @@
   }
 
   [_reactSubviews removeObject:(UIView *)subview];
-  subview = nil;
 }
 
 - (NSArray<id<RCTComponent>> *)reactSubviews {

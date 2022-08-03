@@ -284,7 +284,6 @@ export class Marker extends Component<MarkerProps> {
                 haloColor: parseColor(this.props.subCaption.haloColor),
             }}/>
     }
-
 }
 
 export interface CircleProps extends MapOverlay {
