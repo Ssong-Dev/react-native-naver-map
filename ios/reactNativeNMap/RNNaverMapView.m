@@ -90,7 +90,9 @@
       [self removeReactSubview:(UIView *)childSubviews[i]];
     }
   }
+
   [_reactSubviews removeObject:(UIView *)subview];
+  subview = nil;
 }
 
 - (NSArray<id<RCTComponent>> *)reactSubviews {

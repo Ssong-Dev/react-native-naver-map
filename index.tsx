@@ -266,12 +266,9 @@ export interface MarkerProps extends MapOverlay {
     };
 }
 
-let element;
-
 export class Marker extends Component<MarkerProps> {
     render() {
-        element=null;
-        element=<RNNaverMapMarker
+        return <RNNaverMapMarker
             {...this.props}
             image={getImageUri(this.props.image)}
             caption={this.props.caption && {
@@ -286,8 +283,6 @@ export class Marker extends Component<MarkerProps> {
                 color: parseColor(this.props.subCaption.color),
                 haloColor: parseColor(this.props.subCaption.haloColor),
             }}/>
-
-        return element;
     }
 }
 
