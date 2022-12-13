@@ -126,6 +126,11 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         view.setZIndex(zIndex);
     }
 
+    @ReactProp(name = "isHideCollidedMarkers", defaultBoolean = false)
+    public void setHideCollidedMarkers(RNNaverMapMarker view, boolean collided) {
+        view.setHideCollidedMarkers(collided);
+    }
+
     @ReactProp(name = "caption")
     public void setCaption(RNNaverMapMarker view, ReadableMap map) {
         if (map == null || !map.hasKey("text")) {
