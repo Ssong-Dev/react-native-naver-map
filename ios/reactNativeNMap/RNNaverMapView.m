@@ -11,7 +11,7 @@
 #import <React/RCTBridge.h>
 #import <React/UIView+React.h>
 
-#import <NMapsMap/NMGLatLng.h>
+#import <NMapsGeometry/NMGLatLng.h>
 #import <NMapsMap/NMFMarker.h>
 #import <NMapsMap/NMFCameraUpdate.h>
 #import <NMapsMap/NMFCameraPosition.h>
@@ -72,25 +72,37 @@
   if ([subview isKindOfClass:[RNNaverMapMarker class]]) {
     RNNaverMapMarker *marker = (RNNaverMapMarker*)subview;
     marker.realMarker.mapView = nil;
+    [marker.realMarker setMapView:nil];
+    marker.realMarker = nil;
   } else if ([subview isKindOfClass:[RNNaverMapPolylineOverlay class]]) {
     RNNaverMapPolylineOverlay *overlay = (RNNaverMapPolylineOverlay*)subview;
     overlay.realOverlay.mapView = nil;
+       [overlay.realOverlay setMapView:nil];
+          overlay.realOverlay=nil;
   } else if ([subview isKindOfClass:[RNNaverMapPathOverlay class]]) {
     RNNaverMapPathOverlay *overlay = (RNNaverMapPathOverlay*)subview;
     overlay.realOverlay.mapView = nil;
+       [overlay.realOverlay setMapView:nil];
+          overlay.realOverlay=nil;
   } else if ([subview isKindOfClass:[RNNaverMapCircleOverlay class]]) {
     RNNaverMapCircleOverlay *overlay = (RNNaverMapCircleOverlay*)subview;
     overlay.realOverlay.mapView = nil;
+       [overlay.realOverlay setMapView:nil];
+          overlay.realOverlay=nil;
   } else if ([subview isKindOfClass:[RNNaverMapPolygonOverlay class]]) {
     RNNaverMapPolygonOverlay *overlay = (RNNaverMapPolygonOverlay*)subview;
     overlay.realOverlay.mapView = nil;
+    [overlay.realOverlay setMapView:nil];
+    overlay.realOverlay=nil;
   } else {
     NSArray<id<RCTComponent>> *childSubviews = [subview reactSubviews];
     for (int i = 0; i < childSubviews.count; i++) {
       [self removeReactSubview:(UIView *)childSubviews[i]];
     }
   }
+
   [_reactSubviews removeObject:(UIView *)subview];
+  subview = nil;
 }
 
 - (NSArray<id<RCTComponent>> *)reactSubviews {
