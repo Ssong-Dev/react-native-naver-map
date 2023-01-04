@@ -1,5 +1,6 @@
 package com.github.quadflask.react.navermap;
 
+import com.github.quadflask.react.navermap.utils.GpsUtilsModule;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -12,7 +13,8 @@ public class RNNaverMapPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.asList(
-                new RNNaverMapJavaModule(reactContext)
+                new RNNaverMapJavaModule(reactContext),
+                new GpsUtilsModule(reactContext)
         );
     }
 
