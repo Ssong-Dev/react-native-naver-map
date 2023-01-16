@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
 
   s.static_framework = true
   s.dependency 'React'
-  s.dependency 'NMapsMap', '~> 3.16.0'
+  s.dependency 'NMapsMap', '~> 3.16.1'
 
 end
