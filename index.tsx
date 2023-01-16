@@ -1,5 +1,6 @@
 import React, {Component, SyntheticEvent} from 'react';
 import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
+import { GpsUtils } from './gpsUtilsInterface'
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
 const RNNaverMapViewTexture = Platform.select({
@@ -119,6 +120,7 @@ export interface NaverMapViewProps {
     stopGesturesEnabled?: boolean;
     liteModeEnabled?: boolean;
     useTextureView?: boolean;
+    children?: Element;
 }
 
 export default class NaverMapView extends Component<NaverMapViewProps, {}> {
@@ -372,3 +374,5 @@ function parseColor(color?: string | null): string | null | undefined | number {
         return processColor(color);
     return color;
 }
+
+export { GpsUtils };

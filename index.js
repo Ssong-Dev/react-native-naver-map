@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { findNodeHandle, Image, NativeModules, Platform, processColor, requireNativeComponent, UIManager, } from 'react-native';
+import { GpsUtils } from './gpsUtilsInterface'
+
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
 const RNNaverMapViewTexture = Platform.select({
     android: () => requireNativeComponent('RNNaverMapViewTexture'),
@@ -152,3 +154,4 @@ function parseColor(color) {
         return processColor(color);
     return color;
 }
+export { GpsUtils };

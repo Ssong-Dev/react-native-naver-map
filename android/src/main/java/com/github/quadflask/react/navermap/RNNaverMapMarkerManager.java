@@ -19,6 +19,7 @@ import com.naver.maps.map.overlay.Align;
 import static com.github.quadflask.react.navermap.ReactUtil.parseAlign;
 import static com.github.quadflask.react.navermap.ReactUtil.parseColorString;
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
+import static com.github.quadflask.react.navermap.ReactUtil.px2dp;
 
 public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNaverMapMarker> {
     private static final Align DEFAULT_CAPTION_ALIGN = Align.Bottom;
