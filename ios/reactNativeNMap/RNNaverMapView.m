@@ -30,12 +30,11 @@
 {
   NSMutableArray<UIView *> *_reactSubviews;
 }
-BOOL initialized = NO;
+
 - (nonnull instancetype)initWithFrame:(CGRect)frame
 {
   if ((self = [super initWithFrame:frame])) {
     _reactSubviews = [NSMutableArray new];
-      initialized = NO;
   }
   return self;
 }
@@ -119,10 +118,6 @@ BOOL initialized = NO;
       @"contentRegion" : pointsToJson(mapView.contentRegion.exteriorRing.points),
       @"coveringRegion": pointsToJson(mapView.coveringRegion.exteriorRing.points),
     });
-    if (initialized == NO ) {
-      ((RNNaverMapView*)self).onInitialized(@{});
-      initialized = YES;
-    }
 }
 
 static NSArray* pointsToJson(NSArray<NMGLatLng*> *points) {
