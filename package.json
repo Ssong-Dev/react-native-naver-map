@@ -1,5 +1,5 @@
 {
-  "name": "react-native-nmap",
+  "name": "@wayne-kim/react-native-nmap",
   "version": "0.0.78",
   "description": "react-native bridge for naver map",
   "main": "index.js",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/quadflask/react-native-naver-map"
+    "url": "https://github.com/WayneKim92/react-native-naver-map"
   },
   "keywords": [
     "react-native",
@@ -24,7 +24,7 @@
   ],
   "peerDependencies": {
     "react": "^17.0.2",
-    "react-native": "^0.68.5"
+    "react-native": "^0.67.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -37,7 +37,7 @@
     "jest": "^29.3.1",
     "metro-react-native-babel-preset": "^0.56.0",
     "react": "^17.0.2",
-    "react-native": "^0.68.5",
+    "react-native": "^0.67.5",
     "react-test-renderer": "^17.0.2",
     "typescript": "^3.9.10"
   },
