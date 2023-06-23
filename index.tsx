@@ -1,5 +1,5 @@
 import React, {Component, SyntheticEvent} from 'react';
-import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
+import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, View, ViewStyle,} from 'react-native';
 import { GpsUtils } from './gpsUtilsInterface'
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
@@ -54,12 +54,12 @@ export enum Gravity {
     AXIS_PULL_AFTER = 0x0004,
     AXIS_X_SHIFT = 0,
     AXIS_Y_SHIFT = 4,
-    TOP = (AXIS_PULL_BEFORE | AXIS_SPECIFIED) << AXIS_Y_SHIFT,
-    BOTTOM = (AXIS_PULL_AFTER | AXIS_SPECIFIED) << AXIS_Y_SHIFT,
-    LEFT = (AXIS_PULL_BEFORE | AXIS_SPECIFIED) << AXIS_X_SHIFT,
-    RIGHT = (AXIS_PULL_AFTER | AXIS_SPECIFIED) << AXIS_X_SHIFT,
-    CENTER_VERTICAL = AXIS_SPECIFIED << AXIS_Y_SHIFT,
-    CENTER_HORIZONTAL = AXIS_SPECIFIED << AXIS_X_SHIFT,
+    TOP = ((AXIS_PULL_BEFORE | AXIS_SPECIFIED) << AXIS_Y_SHIFT),
+    BOTTOM = ((AXIS_PULL_AFTER | AXIS_SPECIFIED) << AXIS_Y_SHIFT),
+    LEFT = ((AXIS_PULL_BEFORE | AXIS_SPECIFIED) << AXIS_X_SHIFT),
+    RIGHT = ((AXIS_PULL_AFTER | AXIS_SPECIFIED) << AXIS_X_SHIFT),
+    CENTER_VERTICAL = (AXIS_SPECIFIED << AXIS_Y_SHIFT),
+    CENTER_HORIZONTAL = (AXIS_SPECIFIED << AXIS_X_SHIFT),
 }
 
 export enum Align {
@@ -94,7 +94,7 @@ export interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        contentRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }) => void;
     onMapClick?: (event: {
@@ -120,7 +120,7 @@ export interface NaverMapViewProps {
     stopGesturesEnabled?: boolean;
     liteModeEnabled?: boolean;
     useTextureView?: boolean;
-    children?: Element;
+    children?: React.ReactNode;
 }
 
 export default class NaverMapView extends Component<NaverMapViewProps, {}> {
@@ -178,7 +178,7 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        contentRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }>) => this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
 
@@ -246,6 +246,7 @@ export interface MarkerProps extends MapOverlay {
     isHideCollidedCaptions?: boolean;
     isForceShowIcon?: boolean;
     animated?: boolean;
+    children?: React.ReactNode;
     caption?: {
         text?: string;
         align?: Align;
@@ -270,7 +271,7 @@ export interface MarkerProps extends MapOverlay {
 
 export class Marker extends Component<MarkerProps> {
     render() {
-        return <RNNaverMapMarker
+        return<RNNaverMapMarker
             {...this.props}
             image={getImageUri(this.props.image)}
             caption={this.props.caption && {
@@ -285,6 +286,7 @@ export class Marker extends Component<MarkerProps> {
                 color: parseColor(this.props.subCaption.color),
                 haloColor: parseColor(this.props.subCaption.haloColor),
             }}/>
+        
     }
 }
 
