@@ -208,6 +208,7 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
 
         // @ts-ignore
         return <ViewClass
+            // @ts-ignore
             ref={this.resolveRef}
             {...this.props}
             // @ts-ignore
@@ -332,6 +333,7 @@ interface PolygonProps extends Omit<MapOverlay, "coordinate"> {
 
 export class Polygon extends Component<PolygonProps> {
     render() {
+        // @ts-ignore
         return Platform.select({
             android: () => <RNNaverMapPolygonOverlay {...this.props} />,
             ios: () => <RNNaverMapPolygonOverlay
