@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import { ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
+import { GpsUtils } from './gpsUtilsInterface';
 declare const RNNaverMapView: any;
 export interface Coord {
     latitude: number;
@@ -104,6 +105,7 @@ export interface NaverMapViewProps {
     stopGesturesEnabled?: boolean;
     liteModeEnabled?: boolean;
     useTextureView?: boolean;
+    children?: React.ReactNode;
 }
 export default class NaverMapView extends Component<NaverMapViewProps, {}> {
     ref?: RNNaverMapView;
@@ -122,14 +124,14 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
     setLayerGroupEnabled: (group: LayerGroup, enabled: boolean) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;
-    handleOnCameraChange: (event: React.SyntheticEvent<{}, {
+    handleOnCameraChange: (event: SyntheticEvent<{}, {
         latitude: number;
         longitude: number;
         zoom: number;
         contentRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }>) => void;
-    handleOnMapClick: (event: React.SyntheticEvent<{}, {
+    handleOnMapClick: (event: SyntheticEvent<{}, {
         x: number;
         y: number;
         latitude: number;
@@ -143,7 +145,7 @@ export interface MapOverlay {
     coordinate: Coord;
     onClick?: () => void;
 }
-export interface MarkerProps extends React.Component<MapOverlay> {
+export interface MarkerProps extends MapOverlay {
     anchor?: {
         x: number;
         y: number;
@@ -233,4 +235,4 @@ export interface PathProps extends Omit<MapOverlay, "coordinate"> {
 export declare class Path extends Component<PathProps> {
     render(): JSX.Element;
 }
-export {};
+export { GpsUtils };

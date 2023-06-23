@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { findNodeHandle, Image, NativeModules, Platform, processColor, requireNativeComponent, UIManager, } from 'react-native';
-import { GpsUtils } from './gpsUtilsInterface'
-
+import { GpsUtils } from './gpsUtilsInterface';
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
+// @ts-ignore
 const RNNaverMapViewTexture = Platform.select({
     android: () => requireNativeComponent('RNNaverMapViewTexture'),
     ios: () => RNNaverMapView
@@ -92,9 +92,12 @@ export default class NaverMapView extends Component {
             this.dispatchViewManagerCommand('showsMyLocationButton', [show]);
         };
         this.dispatchViewManagerCommand = (command, arg) => {
+            // @ts-ignore
             return Platform.select({
                 // @ts-ignore
-                android: () => UIManager.dispatchViewManagerCommand(this.nodeHandle, 
+                android: () => UIManager.dispatchViewManagerCommand(
+                // @ts-ignore
+                this.nodeHandle, 
                 // @ts-ignore
                 UIManager.getViewManagerConfig('RNNaverMapView').Commands[command], arg),
                 ios: () => NativeModules[`RNNaverMapView`][command](this.nodeHandle, ...arg),
@@ -106,13 +109,18 @@ export default class NaverMapView extends Component {
     render() {
         const { onInitialized, center, tilt, bearing, mapPadding, logoMargin, nightMode, useTextureView, } = this.props;
         const ViewClass = useTextureView ? RNNaverMapViewTexture : RNNaverMapView;
-        return React.createElement(ViewClass, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, logoMargin: logoMargin, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
+        // @ts-ignore
+        return React.createElement(ViewClass, Object.assign({ ref: this.resolveRef }, this.props, { 
+            // @ts-ignore
+            onInitialized: onInitialized, center: center, mapPadding: mapPadding, logoMargin: logoMargin, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
     }
 }
 export class Marker extends Component {
     render() {
         var _a, _b;
-        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { image: getImageUri(this.props.image), caption: this.props.caption && Object.assign(Object.assign({}, this.props.caption), { textSize: (_a = this.props.caption.textSize) !== null && _a !== void 0 ? _a : 12, color: parseColor(this.props.caption.color), haloColor: parseColor(this.props.caption.haloColor) }), subCaption: this.props.subCaption && Object.assign(Object.assign({}, this.props.subCaption), { textSize: (_b = this.props.subCaption.textSize) !== null && _b !== void 0 ? _b : 12, color: parseColor(this.props.subCaption.color), haloColor: parseColor(this.props.subCaption.haloColor) }) }));
+        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { 
+            // @ts-ignore
+            image: getImageUri(this.props.image), caption: this.props.caption && Object.assign(Object.assign({}, this.props.caption), { textSize: (_a = this.props.caption.textSize) !== null && _a !== void 0 ? _a : 12, color: parseColor(this.props.caption.color), haloColor: parseColor(this.props.caption.haloColor) }), subCaption: this.props.subCaption && Object.assign(Object.assign({}, this.props.subCaption), { textSize: (_b = this.props.subCaption.textSize) !== null && _b !== void 0 ? _b : 12, color: parseColor(this.props.subCaption.color), haloColor: parseColor(this.props.subCaption.haloColor) }) }));
     }
 }
 export class Circle extends Component {
@@ -129,7 +137,9 @@ export class Polygon extends Component {
     render() {
         return Platform.select({
             android: () => React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props)),
-            ios: () => React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props, { coordinates: {
+            ios: () => React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props, { 
+                // @ts-ignore
+                coordinates: {
                     exteriorRing: this.props.coordinates,
                     interiorRings: this.props.holes,
                 } }))
@@ -138,7 +148,9 @@ export class Polygon extends Component {
 }
 export class Path extends Component {
     render() {
-        return React.createElement(RNNaverMapPathOverlay, Object.assign({}, this.props, { pattern: getImageUri(this.props.pattern) }));
+        return React.createElement(RNNaverMapPathOverlay, Object.assign({}, this.props, { 
+            // @ts-ignore
+            pattern: getImageUri(this.props.pattern) }));
     }
 }
 function getImageUri(src) {
@@ -151,6 +163,7 @@ function getImageUri(src) {
 }
 function parseColor(color) {
     if (color && Platform.OS === 'ios')
+        // @ts-ignore
         return processColor(color);
     return color;
 }

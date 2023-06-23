@@ -1,8 +1,9 @@
 import React, {Component, SyntheticEvent} from 'react';
-import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, View, ViewStyle,} from 'react-native';
+import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
 import { GpsUtils } from './gpsUtilsInterface'
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
+// @ts-ignore
 const RNNaverMapViewTexture = Platform.select({
     android: () => requireNativeComponent('RNNaverMapViewTexture'),
     ios: () => RNNaverMapView
@@ -161,9 +162,11 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
     };
 
     private dispatchViewManagerCommand = (command: string, arg: any) => {
+        // @ts-ignore
         return Platform.select({
             // @ts-ignore
             android: () => UIManager.dispatchViewManagerCommand(
+                // @ts-ignore
                 this.nodeHandle,
                 // @ts-ignore
                 UIManager.getViewManagerConfig('RNNaverMapView').Commands[command],
@@ -203,9 +206,11 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
 
         const ViewClass = useTextureView ? RNNaverMapViewTexture : RNNaverMapView;
 
+        // @ts-ignore
         return <ViewClass
             ref={this.resolveRef}
             {...this.props}
+            // @ts-ignore
             onInitialized={onInitialized}
             center={center}
             mapPadding={mapPadding}
@@ -273,6 +278,7 @@ export class Marker extends Component<MarkerProps> {
     render() {
         return<RNNaverMapMarker
             {...this.props}
+            // @ts-ignore
             image={getImageUri(this.props.image)}
             caption={this.props.caption && {
                 ...this.props.caption,
@@ -330,6 +336,7 @@ export class Polygon extends Component<PolygonProps> {
             android: () => <RNNaverMapPolygonOverlay {...this.props} />,
             ios: () => <RNNaverMapPolygonOverlay
                 {...this.props}
+                // @ts-ignore
                 coordinates={{
                     exteriorRing: this.props.coordinates,
                     interiorRings: this.props.holes,
@@ -357,6 +364,7 @@ export class Path extends Component<PathProps> {
     render() {
         return <RNNaverMapPathOverlay
             {...this.props}
+            // @ts-ignore
             pattern={getImageUri(this.props.pattern)}
         />
     }
@@ -373,6 +381,7 @@ function getImageUri(src?: ImageSourcePropType): string | null {
 
 function parseColor(color?: string | null): string | null | undefined | number {
     if (color && Platform.OS === 'ios')
+        // @ts-ignore
         return processColor(color);
     return color;
 }
